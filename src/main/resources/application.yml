@@ -1,0 +1,54 @@
+spring:
+  datasource:
+#    type: org.apache.commons.dbcp.BasicDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test_data?characterEncoding=UTF-8
+    username: root
+    password: 123456
+    druid:
+      initial-size: 0
+      max-active: 10
+      min-idle: 0
+      max-wait-thread-count: 10
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+
+#  data:
+#    elasticsearch:
+#      cluster-nodes: localhost:9300
+    
+
+logging:
+  level:
+    com.example.demo.mapper: DEBUG
+
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: update
+
+#mybatis:
+#  config-location: classpath:mybatis-config.xml
+# 扫描mapper文件
+#  mapper-locations: classpath:mapper/*.xml
+#扫描实体类包
+#  type-aliases-package: com.example.demo.pojo
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*.xml
+  type-aliases-package: com.example.demo.pojo
+  global-config:
+    #刷新mapper 调试神器
+    db-config:
+      #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+      id-type: id-worker
+      #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+#      field-strategy: not-empty
+#      db-type: mysql
+      
+commonp:
+  name: 测试
+  age: 测试
+  elasticsearch:
+    host: localhost
+    port: 9300
