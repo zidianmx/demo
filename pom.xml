@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.8.RELEASE</version>
+		<version>2.0.0.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -25,35 +25,55 @@
 	</properties>
 
 	<dependencies>
+		<!--web环境-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+		
+		<!-- mysql -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		
+		<!-- 测试 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- 绑定自定义参数 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
+		
+		<!-- 封装hibernate关系型数据库 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 		      <groupId>org.mybatis.spring.boot</groupId> -->
-<!-- 		      <artifactId>mybatis-spring-boot-starter</artifactId> -->
-<!-- 		      <version>1.1.1</version> -->
+		
+<!-- 		 <dependency> -->
+<!-- 	      	<groupId>org.mybatis.spring.boot</groupId> -->
+<!-- 	      	<artifactId>mybatis-spring-boot-starter</artifactId> -->
+<!-- 		    <version>1.1.1</version> -->
 <!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!--             <groupId>com.github.pagehelper</groupId> -->
+<!--             <artifactId>pagehelper-spring-boot-autoconfigure</artifactId> -->
+<!--             <version>1.2.5</version> -->
+<!--         </dependency> -->
+<!--         <dependency> -->
+<!--             <groupId>com.github.pagehelper</groupId> -->
+<!--             <artifactId>pagehelper</artifactId> -->
+<!--             <version>5.1.4</version> -->
+<!--         </dependency> -->
+		
 		<!-- mybatis-plus begin -->
 		<dependency>
 			<groupId>com.baomidou</groupId>
@@ -61,25 +81,33 @@
 			<version>3.0-alpha</version>
 		</dependency>
 		<!-- mybatis-plus end -->
+		<!-- spring连接池 -->
 <!-- 		<dependency> -->
 <!-- 		    <groupId>commons-dbcp</groupId> -->
 <!-- 		    <artifactId>commons-dbcp</artifactId> -->
 <!-- 		    <version>1.4</version> -->
 <!-- 		</dependency> -->
-	<!-- druid阿里巴巴数据库连接池 -->
+
+	    <!-- druid阿里巴巴数据库连接池 -->
 		<dependency>
 		    <groupId>com.alibaba</groupId>
 		    <artifactId>druid-spring-boot-starter</artifactId>
 		    <version>1.1.10</version>
 		</dependency>
+		
+		<!-- spring batch批处理 -->
 		<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-batch</artifactId>
         </dependency>
+        
+        <!-- 模板引擎包含spring-boot-web -->
         <dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
+		
+		<!-- es引擎 -->
 		<dependency>
 			<groupId>org.elasticsearch</groupId>
 			<artifactId>elasticsearch</artifactId>
@@ -90,9 +118,99 @@
 			<artifactId>transport</artifactId>
 			<version>5.5.1</version>
 		</dependency>
-	</dependencies>
+		<!-- redis缓存 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+		
+		<!--spring2.0集成redis所需common-pool2-->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.apache.commons</groupId> -->
+<!-- 			<artifactId>commons-pool2</artifactId> -->
+<!-- 			<version>2.4.2</version> -->
+<!-- 		</dependency> -->
+<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+<!-- <dependency> -->
+<!--     <groupId>org.mybatis</groupId> -->
+<!--     <artifactId>mybatis</artifactId> -->
+<!--     <version>3.4.6</version> -->
+<!-- </dependency> -->
+		
+		<!-- 配置可以返回jsp -->
+<!-- 		<dependency> -->
+<!--            <groupId>org.springframework.boot</groupId> -->
+<!--            <artifactId>spring-boot-starter-tomcat</artifactId> -->
+<!--            <scope>provided</scope> -->
+<!--        </dependency> -->
 
+<!--        <dependency> -->
+<!--            <groupId>org.apache.tomcat.embed</groupId> -->
+<!--            <artifactId>tomcat-embed-jasper</artifactId> -->
+<!--            <scope>provided</scope> -->
+<!--        </dependency> -->
+		
+<!-- 	<dependency> -->
+<!--             <groupId>org.apache.spark</groupId> -->
+<!--             <artifactId>spark-core_2.11</artifactId> -->
+<!--             <version>2.0.2</version> -->
+<!--         </dependency> -->
+
+<!--         <dependency> -->
+<!--             <groupId>org.apache.spark</groupId> -->
+<!--             <artifactId>spark-sql_2.11</artifactId> -->
+<!--             <version>2.0.2</version> -->
+<!--         </dependency> -->
+
+<!--         <dependency> -->
+<!--             <groupId>org.elasticsearch</groupId> -->
+<!--             <artifactId>elasticsearch-spark-20_2.11</artifactId> -->
+<!--             <version>6.2.4</version> -->
+<!--         </dependency> -->
+	
+	
+	</dependencies>
+	
+	<profiles>
+	    <profile>
+	        <id>dev</id>
+	        <activation>
+	            <activeByDefault>true</activeByDefault>
+	        </activation>  
+	        <properties>
+	            <profileActive>dev</profileActive>
+	        </properties>
+	    </profile>
+	    <profile>
+	        <id>test</id>
+	        <properties>
+	            <profileActive>test</profileActive>
+	        </properties>
+	    </profile>
+	    <profile>
+	        <id>prod</id>
+	        <properties>
+	            <profileActive>prod</profileActive>
+	        </properties>
+	    </profile>
+	</profiles>
+	
 	<build>
+		<finalName>${artifactId}-${profileActive}</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>*.xml</include>
+					<include>mapper</include>
+					<include>mapper/*.xml</include>
+					<include>application.yml</include>
+					<include>application-${profileActive}.yml</include>
+				</includes>
+			</resource>
+		</resources>
+		
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -100,6 +218,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
 
 </project>

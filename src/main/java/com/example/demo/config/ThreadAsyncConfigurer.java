@@ -51,7 +51,7 @@ public class ThreadAsyncConfigurer  implements AsyncConfigurer {
     class MyAsyncExceptionHandler implements AsyncUncaughtExceptionHandler {
         @Override  
         public void handleUncaughtException(Throwable throwable, Method method, Object... obj) {  
-        	logger.error("Exception message - " + throwable.getMessage());  
+        	logger.error("Exception message - " + throwable.getMessage()+method.toGenericString());  
         	logger.error("Method name - " + method.getName());  
             for (Object param : obj) {  
             	logger.info("Parameter value - " + param);  

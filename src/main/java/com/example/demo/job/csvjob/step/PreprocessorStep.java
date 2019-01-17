@@ -42,12 +42,12 @@ public class PreprocessorStep {
 //    private String rootPath;
 
 
-    @Bean
+//    @Bean
     public ValidatingProcessor validatingProcessor() {
         return new ValidatingProcessor(resourcePatternResolver);
     }
 
-    @Bean
+//    @Bean 此注解为注册bean
     public Step validatorStep() {
 
         return stepBuilderFactory.get("validatorStep")
@@ -66,7 +66,7 @@ public class PreprocessorStep {
 		return stepBuilderFactory.get("validatorStep1")
         .<User, User>chunk(1)    // 每读取多少条进行一次处理和写入
         .reader(csvReader.validatorFileReader1())
-        .processor(validatingProcessor())
+//        .processor(validatingProcessor())
         .writer(testWriter)
         .faultTolerant().skipLimit(0)
         .skip(Exception.class).allowStartIfComplete(true)

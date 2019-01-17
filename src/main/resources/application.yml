@@ -1,8 +1,15 @@
 spring:
+  profiles:
+    active: '@profileActive@'
   datasource:
+#返回jsp配置
+#    mvc:
+#      view:
+#        prefix: /WEB-INF/jsp/
+#        suffix: .jsp
 #    type: org.apache.commons.dbcp.BasicDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/test_data?characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/test_data?characterEncoding=UTF-8&useSSL=false
     username: root
     password: 123456
     druid:
@@ -12,22 +19,41 @@ spring:
       max-wait-thread-count: 10
       max-wait: 60000
       time-between-eviction-runs-millis: 60000
+#    jackson:
+#     date-format: yyyy-MM-dd HH:mm:ss
 
+  batch:
+    job:
+      enabled: false #项目启动时不执行job
+  
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    timeout: 3000
+    jedis:
+     pool:
+      max-idle: 20 # 连接池中的最大空闲连接，默认值是8
+      min-idle: 5 #连接池中的最小空闲连接，默认值是0
+      # 如果赋值为-1，则表示不限制；如果pool已经分配了maxActive个jedis实例，则此时pool的状态为exhausted(耗尽)
+      max-active: 50
+      max-wait: 2000
+    
 #  data:
 #    elasticsearch:
-#      cluster-nodes: localhost:9300
-    
+#      cluster-nodes: localhost:9300    
 
-logging:
-  level:
-    com.example.demo.mapper: DEBUG
+#自定义包的日志级别打印出sql
+#logging:
+#  level:
+#    com.example.demo.mapper: DEBUG
 
 #  jpa:
 #    show-sql: true
 #    hibernate:
 #      ddl-auto: update
 
-#mybatis:
+#mybatis: 
 #  config-location: classpath:mybatis-config.xml
 # 扫描mapper文件
 #  mapper-locations: classpath:mapper/*.xml
@@ -37,15 +63,21 @@ logging:
 mybatis-plus:
   mapper-locations: classpath:/mapper/*.xml
   type-aliases-package: com.example.demo.pojo
+  #懒加载设置
+#  configuration:
+#    lazy-loading-enabled: true
+#    aggressive-lazy-loading: false
   global-config:
-    #刷新mapper 调试神器
     db-config:
       #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+      #AUTO:"数据库ID自增", INPUT:"用户输入ID",ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
       id-type: id-worker
       #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
 #      field-strategy: not-empty
 #      db-type: mysql
-      
+      #逻辑删除配置 1已删除 0未删除
+      logic-delete-value: 1
+      logic-not-delete-value: 0
 commonp:
   name: 测试
   age: 测试

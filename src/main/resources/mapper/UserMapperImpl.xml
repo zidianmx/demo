@@ -2,8 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.demo.mapper.UserMapper" >
 	<select id="getAll" resultType="com.example.demo.pojo.User">
-		select * from user
+		select * from user_info
 	</select>
 
-
+	<select id="getLazy" resultMap="getOrderMap">
+		select * from orders
+	</select>
+	
+	<resultMap type="com.example.demo.pojo.Order" id="getOrderMap">
+		<id column="id" property="id" />
+		<result column="number" property="number"/>
+		<!-- 对用户信息进行延迟加载 -->
+		<!-- select：指定延迟加载要执行的statement的id（是根据user_id查询用户信息是statement）
+		要使用UserMapper.xml中findUserById完成根据用户id（user_id）对用户信息的查询，如果findUserById不在本mapper中，需要前边加namespace
+		column：订单信息中关联用户信息的列，是user_id -->
+		<association property="user" select="findUserById" column="user_id" javaType="com.example.demo.pojo.User">
+			
+		</association>
+	</resultMap>
+	
+	<select id="findUserById" resultType="com.example.demo.pojo.User" parameterType="int">
+		select * from user_info where id = #{id}
+	</select>
+	
 </mapper>

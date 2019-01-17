@@ -1,14 +1,23 @@
 package com.example.demo.service;
 
-import java.util.List;
+import java.util.Set;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.data.redis.core.ZSetOperations.TypedTuple;
+
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.pojo.User;
 
 
-public interface UserService extends IService<User>{
-	
+public interface UserService {
+//	extends IService<User>
 //	List<User> getUserList();
 	
-	List<User> getUserList1();
+	Page<User> getUserList1();
+
+	Set<TypedTuple<String>> getRedisTest(int id);
+
+	/**
+	 * @return
+	 */
+	Object getLazy();
 }

@@ -49,6 +49,9 @@ public class AsnycTask {
 		System.out.println(Thread.currentThread().getName());
 		logger.info("测试信息");
         logger.error("测试错误");
+        /*
+         * 尽管同步拦截异常成功但是后续代码不会继续执行
+         */
      	User user = null;
         user.getName();
 		for(int i=0;i<10;i++) {

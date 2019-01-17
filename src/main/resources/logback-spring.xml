@@ -12,12 +12,17 @@
             <pattern>%d{HH:mm:ss} [%thread] %-5level %logger{96} : %msg%n</pattern>
         </layout>
     </appender>
-	
+	<!--输出sql到控制台-->
+    <appender name="console1" class="ch.qos.logback.core.ConsoleAppender">
+        <layout>
+            <pattern>%d{HH:mm:ss} [%thread] %-5level %logger{96} : %msg%n</pattern>
+        </layout>
+    </appender>
     <!-- ERROR file output -->
     <appender name="fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
     	<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- rollover daily 配置日志所生成的目录以及生成文件名的规则 -->
-            <fileNamePattern>logs/demo-Error-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>logs/audi-Error-%d{yyyy-MM-dd}.log</fileNamePattern>
         </rollingPolicy>
     	
         <!-- encoder defaults to ch.qos.logback.classic.encoder.PatternLayoutEncoder -->
@@ -48,7 +53,7 @@
     	
     	<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- rollover daily 配置日志所生成的目录以及生成文件名的规则 -->
-            <fileNamePattern>logs/demo-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>logs/audi-%d{yyyy-MM-dd}.log</fileNamePattern>
         </rollingPolicy>
     	
         <!-- encoder defaults to ch.qos.logback.classic.encoder.PatternLayoutEncoder -->
@@ -63,10 +68,15 @@
         <prudent>true</prudent>
     </appender>
 
-    <root level="INFO">
-        <appender-ref ref="fileInfoLog" />
+    <root level="DEBUG">
         <appender-ref ref="console" />
+        <appender-ref ref="fileInfoLog" />
         <appender-ref ref="fileErrorLog" />
     </root>
+	
+	<!-- 单独配置输出方式 -->
+	<logger name="com.example.demo.mapper" level="DEBUG" additivity="false">
+		<appender-ref ref="console1" />
+	</logger>
 	
 </configuration>

@@ -55,7 +55,7 @@ public class ValidatingProcessor implements ItemProcessor<User, User> {
     private static String FAILED;
     private static String COMMIT;
 
-    @Autowired
+//    @Autowired
     public ValidatingProcessor(ResourcePatternResolver resourcePatternResolver) {
         this.resourcePatternResolver = resourcePatternResolver;
     }
@@ -64,17 +64,17 @@ public class ValidatingProcessor implements ItemProcessor<User, User> {
     @Override
     public User process(final User user) throws Exception{
         System.out.println("处理类输出:"+user.toString());
-        Settings settings = Settings.builder()
-                .put("cluster.name", "elasticsearch")
-                .put("client.transport.sniff", true)
-                .put("client.transport.ignore_cluster_name", true)
-                .put("client.transport.ping_timeout", "20s")
-                .build();
-        Client client =new PreBuiltTransportClient(settings).addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(eshost), Integer.parseInt(esport)));
-        GetResponse response = client.prepareGet("movies", "movie", "1")
-                .setOperationThreaded(false)    // 线程安全
-                .get();
-        System.out.println("ES返回数值"+response.getSourceAsString());
+//        Settings settings = Settings.builder()
+//                .put("cluster.name", "elasticsearch")
+//                .put("client.transport.sniff", true)
+//                .put("client.transport.ignore_cluster_name", true)
+//                .put("client.transport.ping_timeout", "20s")
+//                .build();
+//        Client client =new PreBuiltTransportClient(settings).addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(eshost), Integer.parseInt(esport)));
+//        GetResponse response = client.prepareGet("movies", "movie", "1")
+//                .setOperationThreaded(false)    // 线程安全
+//                .get();
+//        System.out.println("ES返回数值"+response.getSourceAsString());
         return user;
     }
 

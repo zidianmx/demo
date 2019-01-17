@@ -1,6 +1,5 @@
 package com.example.demo.job.csvjob.reader;
 
-import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
@@ -15,14 +14,14 @@ import com.example.demo.pojo.User;
 /**
  * Created by zhangde on 2016/12/3. 上午10:57
  */
-@Configuration
+@Configuration //此注解为标注此类为配置类
 public class CsvReader {
     @Autowired
     private ResourcePatternResolver resourcePatternResolver;
 //    @Value("${spring.batch.rootPath}")
 //    private String rootPath;
     
-    @Bean
+//    @Bean 此注解为注册bean
     public FlatFileItemReader<User> validatorFileReader() {
         FlatFileItemReader<User> reader = new FlatFileItemReader<>();
         reader.setResource(resourcePatternResolver.getResource("classpath:userFile.csv"));

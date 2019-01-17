@@ -1,7 +1,6 @@
 package com.example.demo;
 
 import java.util.Date;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +17,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.demo.common.DescribeException;
+import com.example.demo.common.ExceptionEnum;
+import com.example.demo.common.ResultUtil;
 import com.example.demo.job.csvjob.CsvOperationJob;
 import com.example.demo.pojo.User;
 import com.example.demo.service.UserService;
@@ -66,13 +69,19 @@ public class HelloController {
     }
 	
 	@RequestMapping("/hello")
-	public List<User> hello() {
+	public Page<User> hello(User user) {
+		System.out.println("name:"+user.getName());
+		System.out.println("age:"+user.getAge());
+		Page<User> list1 = userService.getUserList1();
+		if(true) {
+			throw new DescribeException("自定义异常抛出", 123);
+		}
 //		List<User> list = ur.findAll();
 //		List<User> list = userMapper.getAll();
 //		User u = list.get(0);
 //		List<User> list = userService.getUserList();
-		List<User> list1 = userService.getUserList1();
+//		Set<TypedTuple<String>> list1 = userService.getRedisTest(1);
 		return list1;
-	}	
+	}
 	
 }

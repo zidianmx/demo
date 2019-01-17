@@ -4,6 +4,9 @@
 	<select id="getAll" resultType="com.example.demo.pojo.User">
 		select * from user
 	</select>
-
+	
+	<insert id="insertUser" parameterType="com.example.demo.pojo.User">
+		insert into user (name,age) values (#{name},#{age})
+	</insert>
 
 </mapper>

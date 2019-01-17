@@ -24,7 +24,7 @@ public class CsvOperationJob {
     @Autowired
     public TestListener listener;
 
-    @Bean
+//    @Bean 此注解为注册bean
     public Job outputUserJob() {
         return jobBuilderFactory.get("outputUserJob")
                 .incrementer(new RunIdIncrementer())
